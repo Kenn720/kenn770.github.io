@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cobaltfield>
+	<name>Video</name>
+	<group>Media Form Elements</group>
+
+	<config>
+		<fields name="params">
+			<fieldset name="tmpl">
+				<field type="filelist" name="template_input" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/video/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="filelist" name="template_output_list" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/video/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field type="filelist" name="template_output_full" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/video/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+
+			<fieldset name="main">
+				<field type="text" name="command" label="F_FFMPEGCMD" size="40" default="c:\ffmpeg\bin\ffmpeg.exe" description="F_FFMPEGCMDDESCR" />
+
+				<field name="file_formats" size="40" type="text" default="avi, mp4, mpeg, flv, ogv" label="F_ALLOWEDFORMATS" />
+				<field name="only_one" type="radio" class="btn-group" default="0" label="F_ONLYONE">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="general" label="FS_UPLOAD">
+				<field name="upload" label="F_WHOCANUPLOAD" type="accesslevel" default="1">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+                <field name="allow_download" label="F_ALLOWDOWNL" type="accesslevel" default="1">
+                    <option value="0">XML_OPT_NOONE</option>
+                </field>
+				<field name="method" type="list" label="F_UPLOADMETHOD">
+					<option value="auto">XML_OPT_AUTO</option>
+					<option value="html5">XML_OPT_HTML5</option>
+					<option value="html4">XML_OPT_HTML4</option>
+					<option value="flash">XML_OPT_FLASH</option>
+				</field>
+				<field name="default_width" type="text" default="640" size="3" label="F_DEFWIDTH" />
+				<field name="max_count" type="text" default="0" size="3" label="F_MAXCOUNTLIMIT" />
+				<field type="text" size="6" name="max_size" label="F_MAXSIZE" description="" default="10240" />
+				<field name="autostart" type="radio" class="btn-group" default="1" label="F_AUTOSTARTUPLOAD">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field type="text" name="subfolder" label="F_SPECSUBFOLDER" description="F_SPECSUBFOLDER_DESCR" default="video" />
+				<field name="file_formats" size="40" type="text" default="avi, mp4, mpeg, flv, ogv" label="F_ALLOWEDFORMATS" />
+				<field name="delete_access" type="radio" class="btn-group" default="1" label="F_AUTHORCANDELETE">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="allow_edit_title" type="radio" class="btn-group" default="1" label="F_ALLOWEDITTITLE">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="allow_add_descr" type="radio" class="btn-group" default="1" label="F_ALLOWADDDESCR">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="sort" type="list" default="0" label="F_SORTBY" description="">
+					<option value="0 ASC">XML_OPT_NAMEASC</option>
+					<option value="0 DESC">XML_OPT_NAMEDESC</option>
+					<option value="1 ASC">XML_OPT_SIZEASC</option>
+					<option value="1 DESC">XML_OPT_SIZEDESC</option>
+					<option value="2 ASC">XML_OPT_HITSASC</option>
+					<option value="2 DESC">XML_OPT_HITSDESC</option>
+					<option value="3 ASC">XML_OPT_IDASC</option>
+					<option value="3 DESC">XML_OPT_IDDESC</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="player" label="F_PLAYERPARAMS">
+				<field name="default_width" type="text" default="640" size="3" label="F_DEFWIDTH" />
+				<field name="listbar" type="radio" class="btn-group" default="1" label="F_SHOWLISTBAR">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="listbar_position" type="list" default="right" label="F_LISTBARPOSITION" >
+					<option value="right">XML_OPT_RIGHT</option>
+					<option value="bottom">XML_OPT_BOTTOM</option>
+				</field>
+				<field name="listbar_width" type="text" default="200" size="3" label="F_LISTBARWIDTH" />
+			</fieldset>
+
+			<fieldset name="embode" label="F_EMBODEPARAMS">
+				<field name="embed" label="F_WHOCANEMBED" type="accesslevel" default="1">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="embed_max_count" type="text" default="0" size="3" label="F_EMBEDEMAXCOUNTLIMIT" />
+			</fieldset>
+
+			<fieldset name="link" label="F_LINKPARAMS">
+				<field name="link" label="F_WHOCANLINK" type="accesslevel" default="1">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="link_max_count" type="text" default="0" size="3" label="F_LINKMAXCOUNTLIMIT" />
+				<field name="adapters" type="list" multiple="multiple" size="7" label="F_ALLOWADDAPTERS">
+					<option value="youtube">You Tube</option>
+					<option value="vimeo">Vimeo</option>
+					<option value="metacafe">Metacafe.com</option>
+					<option value="screencast">Screencast.com</option>
+					<option value="bing">Bing.com</option>
+					<option value="yahoo">screen.yahoo.com</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="emerald" label="F_DOWNLOADSUBSCR" description="F_DOWNLOADSUBSCR_DESCR"  addfieldpath="/components/com_emerald/models/fields/">
+				<field name="subscr_skip" type="accesslevel" default="3" label="F_SUBSCR_SKIPFOR" description="F_SUBSCR_SKIPFORDESCR">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+				<field name="subscr_skip_author" type="radio" class="btn-group" default="1" label="F_SUBSCR_SKIPAUTHOR" description="">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="subscr_skip_moderator" type="radio" class="btn-group" default="1" label="F_SUBSCR_SKIPMODER" description="F_SUBSCR_SKIPMODERDESCR">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="subscription" type="planslist" default="" multiple="true" label="F_SUBSCR_PLANS" description="" />
+				<field name="subscription_count" type="radio" default="" class="btn-group" multiple="true" label="F_SUBSCR_COUNTLIMIT" description="F_SUBSCR_COUNTLIMITDESCR">
+					<option value="0">CNO</option>
+					<option value="1">CYES</option>
+				</field>
+				<field name="subscription_msg" type="text" size="40" default="You cannot download this file. You have to be subscribed member" label="F_SUBSCR_MSG" description="" />
+				<field name="subscription_redirect" type="list" default="1" label="F_SUBSCR_BEHAVE">
+					<option value="0">F_SUBSCR_BEHAVE1</option>
+					<option value="1">F_SUBSCR_BEHAVE2</option>
+				</field>
+				<field name="can_select_subscr" type="accesslevel" default="0" label="F_WHOCANSELECTSUBSCR" description="">
+					<option value="0">XML_OPT_NOONE</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</cobaltfield>

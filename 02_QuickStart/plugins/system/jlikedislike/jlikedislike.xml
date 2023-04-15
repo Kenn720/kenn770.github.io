@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system">
+        <name>plg_system_jlikedislike</name>
+        <author>Alexandr Khmelnitsky</author>
+        <creationDate>December 22th, 2013</creationDate>
+        <copyright>Alexandr Khmelnitsky</copyright>
+        <license>GNU General Public License</license>
+        <authorEmail>info@alexander.khmelnitskiy.ua</authorEmail>
+        <authorUrl>http://alexander.khmelnitskiy.ua</authorUrl>
+        <version>1.0</version>
+        <description>jlikedislike plugin</description>
+        <files>
+            <filename plugin="jlikedislike">jlikedislike.php</filename>
+            <filename>jlikedislike.xml</filename>
+            <filename>index.html</filename>
+            <filename>jlikedislike.js</filename>
+            <filename>jlikedislike.css</filename>
+            <filename>icons_vote.png</filename>
+            <filename>ajax.php</filename>
+        </files>
+</extension> 

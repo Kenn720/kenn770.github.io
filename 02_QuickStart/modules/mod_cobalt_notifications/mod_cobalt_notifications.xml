@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+    <name>Cobalt - Module - Notifications</name>
+    <author>MintJoomla</author>
+    <creationDate>March 2012</creationDate>
+    <copyright>Copyright (C) 2005 - 2012 MintJoomla (http://www.mintjoomla.com). All rights reserved.</copyright>
+    <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+    <authorEmail>support@mintjoomla.com</authorEmail>
+    <authorUrl>http://www.mintjoomla.com</authorUrl>
+	<version>8.29</version>
+    <description><![CDATA[ Cobalt - Notifications ]]></description>
+    <files>
+        <filename module="mod_cobalt_notifications">mod_cobalt_notifications.php</filename>
+        <filename>helper.php</filename>
+        <filename>index.html</filename>
+        <folder>tmpl/</folder>
+        <folder>Scrollable/</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset label="General" name="general" addfieldpath="/libraries/mint/forms/fields/">
+                <field name="section_id" type="meresourcessection" default="" multi="1" label="Select section"
+                       description="Select the Home section which will for this module."/>
+                <field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL"
+                       description="JFIELD_ALT_MODULE_LAYOUT_DESC"/>
+                <field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix"
+                       description="PARAMMODULECLASSSUFFIX"/>
+            </fieldset>
+            <fieldset label="Default Template Settings" name="default">
+                <field name="height" type="text" label="Notifications list height (px)" description="" default="200"
+                       size="5"/>
+                <field name="time" type="text" label="Update list time (sec)" description="" default="3" size="5"/>
+
+            </fieldset>
+            <fieldset label="Bootstrap Notifications" name="bsnoti">
+                <field name="limit" type="text" label="Limit" default="5" size="3" description="How many notifications per page" />
+                <field name="noti_width" type="text" label="Width" default="320" size="3" />
+                <field name="noti_position" type="list" label="Position" default="bottom-left">
+                    <option value="top-left">Top left</option>
+                    <option value="top-right">Top right</option>
+                    <option value="bottom-left">Bottom left</option>
+                    <option value="bottom-right">Bottom right</option>
+                    <option value="center">Center</option>
+                </field>
+                <field name="noti_style" type="list" label="Style" default="bangTidy">
+                    <option value="info">Bootstrap Info</option>
+                    <option value="success">Bootstrap Success</option>
+                    <option value="warning">Bootstrap Warning</option>
+                    <option value="danger">Bootstrap Danger</option>
+                    <option value="inverse">Bootstrap Inverse</option>
+
+                    <option value="blackgloss">Custom Black Gloss</option>
+                    <option value="bangTidy">Custom Bang Tidy</option>
+                </field>
+            </fieldset>
+            <fieldset label="Notimoo Template Settings" name="notimoo" description="Depreciated!! Use Bootstrap notifications">
+                <field name="ntmoo_parent" type="text" label="Parent element" default="" size="20"
+                       description="Set parent element ID where notifications are to be inserted (if is empty - 'body' tag would be parent) "/>
+                <field name="ntmoo_width" type="text" label="Width (px)" default="300" size="5"
+                       description="Width of the notification DOM element"/>
+                <field name="ntmoo_height" type="text" label="Height (px)" default="50" size="5"
+                       description="Height of the notification DOM element"/>
+                <field name="ntmoo_time" type="text" label="Visible time (ms)" default="5000" size="5"
+                       description="Time the notification is displayed"/>
+                <field name="ntmoo_updtime" type="text" label="Update list time (sec)" description="" default="60"
+                       size="5"/>
+                <field name="ntmoo_sticky" type="list" label="Close notification on" default="true"
+                       description="Whether the notification won't be removed until user interaction">
+                    <option value="false">Automatically (visible time used)</option>
+                    <option value="true">Click</option>
+                </field>
+                <field name="ntmoo_locationv" type="list" label="Vertical location" default="top"
+                       description="Whether you want the notifications to be shown on the top or the bottom of the parent element">
+                    <option value="top">Top</option>
+                    <option value="bottom">Bottom</option>
+                </field>
+                <field name="ntmoo_locationh" type="list" label="Horizontal location" default="right"
+                       description="Whether you want the notification to be shown at the left or right of the parent element">
+                    <option value="right">Right</option>
+                    <option value="left">Left</option>
+                </field>
+                <field name="ntmoo_positionv" type="text" label="Vertical base position (px)" default="10" size="5"
+                       description="Vertical base position for the notifications"/>
+                <field name="ntmoo_positionh" type="text" label="Horizontal base position (px)" default="10" size="5"
+                       description="Horizontal base position for the notifications"/>
+                <field name="ntmoo_margin" type="text" label="Margin between events (px)" default="5" size="5"
+                       description="Margin between notifications"/>
+                <field name="ntmoo_opacity_time" type="text" label="Opacity transition time (ms)" default="750" size="5"
+                       description="Duration for notification opacity transition"/>
+                <field name="ntmoo_close_time" type="text" label="Closing transition time (ms)" default="750" size="5"
+                       description="Duration for notification relocation transition when one of them is close"/>
+                <field name="ntmoo_scroll_time" type="text" label="Scrolling relocation time (ms)" default="250"
+                       size="5"
+                       description="Duration for notification relocation transition when parent scroll is moved"/>
+                <field name="ntmoo_opacity" type="text" label="Notification opacity" default="0.95" size="5"
+                       description="Opacity used when the notification is displayed"/>
+                <field name="ntmoo_class" type="text" label="Custom class" default="" size="30"
+                       description="Class you want this notification to have. You can add several classes separated by commas."/>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

@@ -1,0 +1,13 @@
+.rating-container {
+	white-space: nowrap;
+}
+.table-rating {
+	width: 1% !important;
+}
+
+.input-append img { vertical-align: middle }
+
+.pagination .pagination-list li {
+	float: left;
+	padding: 0px !important;
+}

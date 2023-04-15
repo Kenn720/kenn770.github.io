@@ -1,0 +1,67 @@
+/**
+ * @encoding     UTF-8
+ * @version      jlikedislike.css 21.01.2014 3:27:16 drinkmaker
+ * @package      Joomla
+ * @copyright    Copyright (C) 2012 Open Source Matters. All rights reserved.
+ * @license      GNU/GPL, see http://www.gnu.org/licenses/gpl.html
+ * @author       Khmelnytsky Alexandr (drinkmaker@mail.ru)
+ */
+
+.jlikedislike .vote {
+    width: 70px;
+    margin: 10px auto 0 auto;
+    overflow: hidden;
+}
+
+.jlikedislike .votes {
+    display: block;
+    font-size: 35px;
+    line-height: 27px;
+    font-family: Arial,Helvetica,sans-serif;
+}
+
+.jlikedislike .vote a {
+    display: block;
+    width: 33px;
+    height: 28px;
+    border: 1px solid #CCC;
+    border-bottom-color: #AAA;
+    background: #F5F6F7;
+    background: -moz-linear-gradient(top, white 0%, #F5F6F7 100%);
+    background: -webkit-linear-gradient(top, white 0%, #F5F6F7 100%);
+    background: -o-linear-gradient(top, white 0%, #F5F6F7 100%);
+    float: left;
+}
+
+
+.jlikedislike .vote .up {
+    border-right: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.jlikedislike .vote .down {
+    border-left: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: inset 1px 0 0 white;
+}
+
+/* Кнопка ЗА */
+.jlikedislike .vote a:before {
+    content: '';
+    display: block;
+    height: 28px;
+    background: url("icons_vote.png") 0 0 no-repeat;
+}
+.jlikedislike .vote a:hover:before {background-position: 0 -56px;}
+.jlikedislike .vote a:active:before {background-position: 0 -55px;}
+.jlikedislike .vote.disable a:before {background-position: 0 0!important;} 
+
+
+/* Кнопка ПРОТИВ */
+.jlikedislike .vote .down:before {background-position: 0 -28px;}
+.jlikedislike .vote .down:hover:before {background-position: 0 -84px;}
+.jlikedislike .vote .down:active:before {background-position: 0 -83px;}
+.jlikedislike .vote.disable .down:before {background-position: 0 -28px!important;}

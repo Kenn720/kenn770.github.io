@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+	<name>com_cobalt</name>
+	<author>MintJoomla</author>
+	<creationDate>November 2011</creationDate>
+	<copyright><![CDATA[ (c) 2005-2012 MintJoomla]]></copyright>
+	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+	<authorEmail>support@mintjoomla.com</authorEmail>
+	<authorUrl>http://www.mintjoomla.com</authorUrl>
+	<version>8.686</version>
+	<version>8.670</version>
+
+	<scriptfile>install.php</scriptfile>
+
+	<files folder="site">
+		<filename>api.php</filename>
+		<filename>cobalt.php</filename>
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<filename>router.php</filename>
+
+		<folder>configs/</folder>
+		<folder>controllers/</folder>
+		<folder>images/</folder>
+		<folder>library/</folder>
+		<folder>models/</folder>
+		<folder>routers/</folder>
+		<folder>views/</folder>
+	</files>
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB/en-GB.com_cobalt.ini</language>
+	</languages>
+	<administration>
+		<menu link="option=com_cobalt&amp;view=records" img="components/com_cobalt/images/menu/cobalt.png">com_cobalt</menu>
+		<submenu>
+			<menu link="option=com_cobalt&amp;view=records" img="class:article">Records</menu>
+			<menu link="option=com_cobalt&amp;view=sections" img="class:category">Sections</menu>
+			<menu link="option=com_cobalt&amp;view=types" img="components/com_cobalt/images/menu/types.png">Types</menu>
+			<menu link="option=com_config&amp;view=component&amp;component=com_cobalt" img="class:config">Configuration</menu>
+		</submenu>
+		<files folder="admin">
+			<filename>access.xml</filename>
+			<filename>cobalt.php</filename>
+			<filename>controller.php</filename>
+			<filename>index.html</filename>
+			<filename>config.xml</filename>
+
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>images</folder>
+			<folder>library</folder>
+			<folder>models</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+			<folder>xml</folder>
+		</files>
+		<languages folder="admin">
+			<language tag="en-GB">language/en-GB/en-GB.com_cobalt.ini</language>
+			<language tag="en-GB">language/en-GB/en-GB.com_cobalt.sys.ini</language>
+		</languages>
+	</administration>
+	<restorepoint>
+		<customdirs>
+			<dir>modules/mod_cobalt_category</dir>
+			<dir>modules/mod_cobalt_sectionstatistics</dir>
+			<dir>modules/mod_cobalt_tagcoud</dir>
+			<dir>plugins/mint</dir>
+			<dir>plugins/search/cobalt</dir>
+			<dir>plugins/content/glossary</dir>
+			<dir>media/mint</dir>
+			<dir>library/mint</dir>
+		</customdirs>
+		<langfiles>
+			<lang></lang>
+		</langfiles>
+		<extraprefixes>
+			<prefix>js_res</prefix>
+		</extraprefixes>
+	</restorepoint>
+</extension>

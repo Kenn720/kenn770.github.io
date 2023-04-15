@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="mint" method="upgrade">
+	<name>Cobalt - Plugin - Tools</name>
+    <author>MintJoomla</author>
+    <creationDate>February 17 2009</creationDate>
+    <copyright>MintJoomla</copyright>
+    <license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+    <authorEmail>support@mintjoomla.com</authorEmail>
+    <authorUrl>http://www.mintjoomla.com</authorUrl>
+	<version>8.44</version>
+	<version>8.38</version>
+	<description>
+	<![CDATA[ Tools plugin for Cobalt 7 ]]>
+	</description>
+	<files>
+		<filename plugin="toolset">toolset.php</filename>
+		<folder>helpers</folder>
+		<folder>icons</folder>
+	</files>
+</extension>

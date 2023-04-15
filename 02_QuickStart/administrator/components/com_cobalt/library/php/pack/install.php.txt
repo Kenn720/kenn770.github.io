@@ -1,0 +1,801 @@
+<?php
+/**
+ * Cobalt by MintJoomla
+ * a component for Joomla! 1.7 - 2.5 CMS (http://www.joomla.org)
+ * Author Website: http://www.mintjoomla.com/
+ * @copyright Copyright (C) 2012 MintJoomla (http://www.mintjoomla.com). All rights reserved.
+ * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
+ */
+
+defined('_JEXEC') or die('Restricted access');
+
+/**
+ * Script file of Cobalt Pack
+ */
+
+
+class {CLASSNAME} extends packInstallerScript {}
+
+class packInstallerScript
+{
+
+	private $records_with_files = array();
+
+	/**
+	 * Constructor
+	 *
+	 * @param   JAdapterInstance $adapter  The object responsible for running this script
+	 */
+	public function __construct(JAdapterInstance $adapter)
+	{
+		JTable::addIncludePath(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_cobalt/tables');
+		$this->key = (string)$adapter->getParent()->manifest->key;
+
+		define('PACKS_PATH', JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_cobalt/packs');
+		if (!JFolder::exists(PACKS_PATH)) {
+			JFolder::create(PACKS_PATH);
+		}
+		$this->isNew = false;
+		if (!JFile::exists(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json')) {
+			$this->isNew = true;
+		} else {
+			$ids = JFile::read(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json');
+			$this->ids = json_decode($ids, true);
+		}
+	}
+
+	/**
+	 * Called on installation
+	 *
+	 * @param   JAdapterInstance $adapter  The object responsible for running this script
+	 *
+	 * @return  boolean  True on success
+	 */
+	public function install(JAdapterInstance $adapter)
+	{
+		$this->pack = $this->_getObject('pack');
+		$this->_loadUsers();
+
+		$this->_loadTable('Type', 'CobaltTable', 'types');
+
+		$this->_loadTable('Group', 'CobaltTable', 'fields_group', array(
+			'type_id' => 'types'
+		));
+
+		$this->_loadTable('Field', 'CobaltTable', 'fields', array(
+			'type_id' => 'types',
+			'group_id' => 'fields_group'
+		));
+
+		$this->_loadTable('Section', 'CobaltTable', 'sections');
+
+		if ($this->isNew || (!$this->isNew && $this->pack->demo == 1)) {
+			$this->ids['categories'][1] = 1;
+			$this->_loadTable('CobCategory', 'CobaltTable', 'categories', array(
+				'parent_id' => 'categories',
+				'section_id' => 'sections'
+			));
+
+			$this->_loadTable('Usercategory', 'CobaltTable', 'category_user', array(
+				'user_id' => 'users',
+				'section_id' => 'sections'
+			));
+
+			$this->_loadTable('Userpostmap', 'CobaltTable', 'user_post_map', array(
+				'user_id' => 'users',
+				'section_id' => 'sections'
+			));
+
+			$this->_loadTable('Useropt', 'CobaltTable', 'user_options', array(
+				'user_id' => 'users'
+			));
+
+			$this->_loadTable('Userautofollow', 'CobaltTable', 'user_options_autofollow', array(
+				'user_id' => 'users',
+				'section_id' => 'sections'
+			));
+
+			$this->_loadTable('Record', 'CobaltTable', 'records', array(
+				'user_id' => 'users',
+				'type_id' => 'types',
+				'ucatid' => 'category_user',
+				'section_id' => 'sections',
+				'parent_id' => 'records'
+			));
+
+			$this->_loadTable('Record_category', 'CobaltTable', 'record_category', array(
+				'record_id' => 'records',
+				'catid' => 'categories',
+				'section_id' => 'sections'
+			));
+
+			$this->_loadTable('Record_values', 'CobaltTable', 'record_values', array(
+				'field_id' => 'fields',
+				'record_id' => 'records',
+				'user_id' => 'users',
+				'type_id' => 'types',
+				'category_id' => 'categories',
+				'section_id' => 'sections'
+			));
+
+			$this->_loadTable('Favorites', 'CobaltTable', 'favorite', array(
+				'user_id' => 'users',
+				'record_id' => 'records',
+				'section_id' => 'sections'
+			));
+
+			$this->_loadTable('Votes', 'CobaltTable', 'vote', array(
+				'user_id' => 'users',
+				'section_id' => 'sections'
+			));
+
+			$this->_loadTable('Tags', 'CobaltTable', 'tags');
+
+			$this->_loadTable('Taghistory', 'CobaltTable', 'tags_history', array(
+				'record_id' => 'records',
+				'tag_id' => 'tags',
+				'user_id' => 'users',
+				'section_id' => 'sections'
+			));
+
+			$this->_loadTable('Sales', 'CobaltTable', 'sales', array(
+				'user_id' => 'users',
+				'saler_id' => 'users',
+				'record_id' => 'records',
+				'field_id' => 'fields',
+				'section_id' => 'sections'
+			));
+
+			$this->_loadTable('Files', 'CobaltTable', 'files', array(
+				'user_id' => 'users',
+				'record_id' => 'records',
+				'field_id' => 'fields',
+				'section_id' => 'sections',
+				'type_id' => 'types'
+			));
+
+			$this->ids['comments'][1] = 1;
+			$this->_loadTable('Cobcomments', 'CobaltTable', 'comments', array(
+				'user_id' => 'users',
+				'record_id' => 'records',
+				'section_id' => 'sections',
+				'type_id' => 'types',
+				'parent_id' => 'comments',
+				'root_id' => 'comments'
+			));
+
+			$this->_loadTable('Moderators', 'CobaltTable', 'moderators', array(
+				'user_id' => 'users',
+				'section_id' => 'sections'
+			));
+
+		}
+
+		if ($this->isNew) {
+			$this->_loadTable('Notificat', 'CobaltTable', 'notifications', array(
+				'user_id' => 'users',
+				'eventer' => 'users',
+				'ref_1' => 'records',
+				'ref_2' => 'sections',
+				'ref_3' => 'categories',
+				'ref_4' => 'comments',
+				'ref_5' => 'fields'
+			));
+
+		}
+
+		$this->_loadTable('Multilevel', 'CobaltTable', 'field_multilevelselect', array(
+			'field_id' => 'fields',
+			'parent_id' => 'field_multilevelselect'
+		));
+
+		$this->_loadTable('Stepaccess', 'CobaltTable', 'field_stepaccess', array(
+			'field_id' => 'fields',
+			'user_id' => 'users',
+			'record_d' => 'records'
+		));
+
+		$this->_moveFiles();
+		$this->_touchParams();
+		$this->_touchTemplates();
+		$this->_touchConfigs();
+
+		$this->_end();
+	}
+
+	/**
+	 * Called on update
+	 *
+	 * @param   JAdapterInstance $adapter  The object responsible for running this script
+	 *
+	 * @return  boolean  True on success
+	 */
+	public function update(JAdapterInstance $adapter)
+	{
+		$this->install($adapter);
+	}
+
+	/**
+	 * Called on uninstallation
+	 *
+	 * @param   JAdapterInstance $adapter  The object responsible for running this script
+	 */
+	public function uninstall(JAdapterInstance $adapter)
+	{
+
+	}
+
+	private function _end()
+	{
+		$content = json_encode($this->ids);
+		JFile::write(PACKS_PATH . DIRECTORY_SEPARATOR . $this->key . '.json', $content);
+
+		if (JFolder::exists(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_cobalt/packs' . DIRECTORY_SEPARATOR . $this->key)) {
+			JFolder::delete(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_cobalt/packs' . DIRECTORY_SEPARATOR . $this->key);
+		}
+
+		// create empty folder for correct uninstall pack from extension manager
+		JFolder::create(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components/com_cobalt/packs' . DIRECTORY_SEPARATOR . $this->key);
+	}
+
+	private function _touchConfigs()
+	{
+		$content = $this->_getObject('configs');
+		foreach ($content as $config) {
+			$file = JPATH_ROOT . '/components/com_cobalt/configs/' . $config . '.json';
+			if (!JFile::exists($file)) {
+				continue;
+			}
+
+			$array = json_decode(JFile::read($file), TRUE);
+
+			foreach ($array as $key => $val) {
+				foreach ($val AS $k => $v) {
+					if (substr($k, 0, 9) == 'field_id_') {
+						if (is_array($v)) {
+							foreach ($v AS $id)
+								$array[$key][$k][] = $this->ids['fields'][$id];
+						} else {
+							$array[$key][$k] = $this->ids['fields'][$v];
+						}
+					}
+				}
+			}
+			$array = json_encode($array);
+			JFile::write($file, $array);
+		}
+	}
+
+	private function _touchTemplates()
+	{
+		$pack = $this->_getObject('pack', TRUE);
+		settype($pack['sections'], 'array');
+		$key = ($pack['addkey'] ? '_' . $this->key : '');
+
+		$section_table = JTable::getInstance('Section', 'CobaltTable');
+		$type_table = JTable::getInstance('Type', 'CobaltTable');
+
+		foreach ($pack['sections'] as $id => $section) {
+			$params = json_decode($section['params'], TRUE);
+			if (@$params['list']) {
+				$new_id = @$this->ids['sections'][$id];
+				if ($section_table->load($new_id)) {
+					$tparams = new JRegistry($section_table->params);
+					$tmpls = $tparams->get('general.tmpl_list');
+					settype($tmpls, 'array');
+					foreach ($tmpls as $tmpl) {
+						$t = explode('.', $tmpl);
+						$file = JPATH_ROOT . DIRECTORY_SEPARATOR . 'components/com_cobalt/views/records/tmpl/default_list_' . $t[0] . $key;
+						$this->_touchFile($file);
+					}
+				}
+			}
+			settype($params['types'], 'array');
+			foreach ($params['types'] as $id => $type) {
+				if (@$type['article']) {
+					$new_id = @$this->ids['types'][$id];
+					if ($type_table->load($new_id)) {
+						$tparams = new JRegistry($type_table->params);
+						$t = explode('.', $tparams->get('properties.tmpl_article'));
+						$file = JPATH_ROOT . DIRECTORY_SEPARATOR . 'components/com_cobalt/views/record/tmpl/default_record_' . $t[0] . $key;
+						$this->_touchFile($file);
+					}
+				}
+			}
+		}
+	}
+
+	private function _touchFile($file)
+	{
+		$php = $file . '.php';
+		if (JFile::exists($php)) {
+			$content = $original = JFile::read($php);
+
+			foreach ($this->ids['fields'] as $old_id => $new_id) {
+				$content = str_replace(array(
+					"fields_by_id[{$old_id}]",
+					"fields_keys_by_id[{$old_id}]"
+				), array(
+					"fields_by_id[{$new_id}]",
+					"fields_keys_by_id[{$new_id}]"
+				), $content);
+			}
+
+			if (md5($original) != md5($content)) {
+				JFile::write($php, $content);
+			}
+		}
+	}
+
+	private function _touchParams()
+	{
+		$table = JTable::getInstance('Field', 'CobaltTable');
+		foreach (@$this->ids['fields'] AS $old_id => $new_id) {
+			if ($table->load($new_id)) {
+				$save = null;
+				$params = new JRegistry($table->params);
+				switch ($table->field_type) {
+					case 'child':
+						$save = 1;
+						$params->set('params.parent_field', (int)@$this->ids['fields'][$params->get('params.parent_field')]);
+						$params->set('params.parent_type', (int)@$this->ids['types'][$params->get('params.parent_type')]);
+						$params->set('params.parent_section', (int)@$this->ids['sections'][$params->get('params.parent_section')]);
+						break;
+					case 'parent':
+						$save = 1;
+						$params->set('params.child_field', (int)@$this->ids['fields'][$params->get('params.child_field')]);
+						$params->set('params.child_section', (int)@$this->ids['sections'][$params->get('params.child_section')]);
+						break;
+					case 'record':
+						$save = 1;
+						$params->set('params.type', (int)@$this->ids['types'][$params->get('params.type')]);
+						$params->set('params.section_id', (int)@$this->ids['sections'][$params->get('params.section_id')]);
+						break;
+					case 'readmore':
+						$save = 1;
+						$params->set('params.type', (int)@$this->ids['types'][$params->get('params.type')]);
+						break;
+					case 'datetime':
+						$save = 1;
+						$params->set('params.field_id_type', (int)@$this->ids['fields'][$params->get('params.field_id_type')]);
+						break;
+				}
+
+				if ($save) {
+					$table->params = $params->toString();
+					$table->store();
+				}
+			}
+		}
+
+
+		$table = JTable::getInstance('Type', 'CobaltTable');
+
+		foreach (@$this->ids['types'] as $old_id => $new_id) {
+			if ($table->load($new_id)) {
+				$params = new JRegistry($table->params);
+				$categories = $params->get('category_limit.category');
+				settype($categories, 'array');
+				JArrayHelper::toInteger($categories);
+				$ids = array();
+				foreach ($categories as $id) {
+					if (!$id) continue;
+					if (!isset($this->ids['categories'][$id])) continue;
+					$ids[] = $this->ids['categories'][$id];
+				}
+				if ($ids) $params->set('category_limit.category', $ids);
+
+				if ($params->get('properties.item_title_composite') && $params->get('properties.item_title') == 2) {
+					if (!is_array($this->ids['fields'])) {
+						continue;
+					}
+					$title = $params->get('properties.item_title_composite');
+					foreach ($this->ids['fields'] AS $old => $new) {
+						$title = str_replace("[$old]", "[$new]", $title);
+					}
+					$params->set('properties.item_title_composite', $title);
+				}
+
+				if($params->get('comments.section_id'))
+				{
+					$params->set('comments.section_id', $this->ids['sections'][$params->get('comments.section_id')]);
+				}
+				if($params->get('comments.type_id'))
+				{
+					$params->set('comments.type_id', $this->ids['types'][$params->get('comments.type_id')]);
+				}
+
+				$table->params = $params->toString();
+				$table->store();
+			}
+		}
+
+		$table = JTable::getInstance('Section', 'CobaltTable');
+		foreach (@$this->ids['sections'] as $old_id => $new_id) {
+			if ($table->load($new_id)) {
+				$params = new JRegistry($table->params);
+				$types = $params->get('general.type');
+				settype($types, 'array');
+				JArrayHelper::toInteger($types);
+				$ids = array();
+				foreach ($types as $id) {
+					if (!$id) continue;
+					if (isset($this->ids['types'][$id])) {
+						$ids[] = $this->ids['types'][$id];
+					}
+				}
+				if (!empty($ids)) {
+					$params->set('general.type', $ids);
+					$table->params = $params->toString();
+					$table->store();
+				}
+			}
+		}
+		if ($this->isNew || (!$this->isNew && $this->pack->demo == 1)) {
+			$table = JTable::getInstance('CobCategory', 'CobaltTable');
+			foreach (@$this->ids['categories'] as $old_id => $new_id) {
+				if ($table->load($new_id)) {
+					$params = new JRegistry($table->params);
+					$types = $params->get('posttype');
+					settype($types, 'array');
+					JArrayHelper::toInteger($types);
+					$ids = array();
+					foreach ($types as $id) {
+						if (!$id) continue;
+						if (isset($this->ids['types'][$id])) {
+							$ids[] = $this->ids['types'][$id];
+						}
+					}
+					if (!empty($ids)) {
+						$params->set('posttype', $ids);
+						$table->params = $params->toString();
+						$table->store();
+					}
+				}
+			}
+
+			$table = JTable::getInstance('Record', 'CobaltTable');
+			settype($this->ids['records'], 'array');
+			foreach (@$this->ids['records'] as $old_id => $new_id) {
+				if (!$table->load($new_id)) {
+					continue;
+				}
+
+				$categories = new JRegistry($table->categories);
+				$categories = $categories->toArray();
+				$new_categories = array();
+				foreach ($categories as $id => $value) {
+					if (!$id) continue;
+					if (isset($this->ids['categories'][$id])) {
+						$new_categories[$this->ids['categories'][$id]] = $value;
+					}
+				}
+				if (!empty($new_categories)) {
+					$categories = new JRegistry($new_categories);
+					$table->categories = $categories->toString();
+					$table->store();
+				}
+
+				$tags = new JRegistry($table->tags);
+				$tags = $tags->toArray();
+				$new_tags = array();
+				foreach ($tags as $id => $value) {
+					if (!$id) continue;
+					if (isset($this->ids['tags'][$id])) {
+						$new_tags[$this->ids['tags'][$id]] = $value;
+					}
+				}
+				if (!empty($new_tags)) {
+					$tags = new JRegistry($new_tags);
+					$table->categories = $tags->toString();
+					$table->store();
+				}
+
+				$fields = new JRegistry($table->fields);
+				$fields = $fields->toArray();
+				$new_fields = array();
+				foreach ($fields as $id => $value) {
+					if (!$id) continue;
+
+					if (is_object($value)) {
+						$value = get_object_vars($value);
+					}
+
+					// If this record has files attached
+					if (!empty($this->records_with_files[$old_id][$id])) {
+						if (is_array(@$value['uploads'])) {
+							$files = & $value['uploads'];
+						} elseif (is_array(@$value['files'])) {
+							$files = & $value['files'];
+						} else {
+							$files = & $value;
+						}
+						if (!is_array($files)) {
+							settype($files, 'array');
+						}
+						foreach ($files as &$file) {
+							if (is_object($file)) {
+								$file = get_object_vars($file);
+							}
+							$nfid = @$this->ids['files'][$file['id']];
+							if ($nfid) {
+								$file['id'] = $nfid;
+							}
+						}
+					}
+
+					if (isset($this->ids['fields'][$id])) {
+						$new_fields[$this->ids['fields'][$id]] = $value;
+					}
+				}
+
+				if (!empty($new_fields)) {
+					$fields = new JRegistry($new_fields);
+					$table->fields = $fields->toString();
+					$table->store();
+				}
+			}
+		}
+	}
+
+	private function _moveFiles()
+	{
+		$pack_usercategories_path = JPATH_ADMINISTRATOR . '/components/com_cobalt/packs/' . $this->key . '/usercategories';
+		if (JFolder::exists($pack_usercategories_path)) {
+			$folders = JFolder::folders($pack_usercategories_path);
+			foreach ($folders as $folder) {
+				$new_foldername = $this->ids['users'][$folder];
+				$path = JPATH_ROOT . '/images/usercategories/' . $new_foldername;
+				if (!JFolder::exists($path)) {
+					JFolder::create($path);
+				}
+				$files = JFolder::files($pack_usercategories_path . DIRECTORY_SEPARATOR . $folder);
+				foreach ($files as $file) {
+					$ext = JFile::getExt($file);
+					$ucid = str_replace('.' . $ext, '', $file);
+					$new_filename = $this->ids['category_user'][$ucid];
+					$dest = JPATH_ROOT . DIRECTORY_SEPARATOR . 'images/usercategories' . DIRECTORY_SEPARATOR . $new_foldername . DIRECTORY_SEPARATOR . $new_filename . '.' . $ext;
+					JFile::copy($pack_usercategories_path . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $file, $dest, '', TRUE);
+				}
+			}
+		}
+	}
+
+	private function _getObject($name, $assoc = false)
+	{
+		$file = JPATH_ADMINISTRATOR . '/components/com_cobalt/packs/' . $this->key . '/' . $name . '.json';
+		if (!JFile::exists($file)) {
+			return array();
+		}
+		$content = file_get_contents($file);
+		$content = json_decode($content, $assoc);
+		return $content;
+	}
+
+	private function _loadUsers()
+	{
+		$users = $this->_getObject('users', true);
+		$db = JFactory::getDBO();
+
+		$table = JTable::getInstance('User', 'JTable');
+
+		JModelLegacy::addIncludePath(JPATH_ROOT . '/components/com_users/models/');
+		$model = JModelLegacy::getInstance('Registration', 'UsersModel');
+
+		$this->ids['users'][0] = 0;
+
+		foreach ($users as $user) {
+			if (!empty($this->ids['users'][$user['id']])) {
+				continue;
+			}
+
+			$sql = "SELECT id FROM #__users WHERE email = '{$user['email']}' OR username = '{$user['username']}'";
+			$db->setQuery($sql);
+			$is_name = $db->loadResult();
+
+			if ($is_name) {
+				$this->ids['users'][$user['id']] = $is_name;
+				continue;
+			}
+
+			$data['name'] = $user['name'];
+			$data['username'] = $user['username'];
+			$data['email1'] = $user['email'];
+			$data['email2'] = $user['email'];
+			$data['password1'] = '123456';
+			$data['password2'] = '123456';
+
+			$model->register($data);
+
+			$sql = "SELECT id FROM #__users WHERE email = '{$user['email']}' OR username = '{$user['username']}'";
+			$db->setQuery($sql);
+			$id = $db->loadResult();
+
+			$this->ids['users'][$user['id']] = $id;
+		}
+	}
+
+	private function _loadTable($name, $prefix, $file, $keys = array())
+	{
+		$db = JFactory::getDbo();
+		$content = $this->_getObject($file, true);
+
+		if ($file == 'categories' || $file == 'comments' || $file == 'field_multilevelselect') {
+			$this->ids[$file][1] = 1;
+		}
+
+		if (!$content) return;
+
+		include_once JPATH_ROOT."/administrator/components/com_cobalt/tables/".strtolower($name).".php";
+		$classname = "CobaltTable".ucfirst($name);
+		$table = new $classname($db);
+		foreach ($content as $row) {
+			$id = @$row['id'];
+
+			// continue if $row empty record [0]=0
+			if(!$id) continue;
+
+			$row['id'] = NULL;
+			if (isset($this->ids[$file][$id]) && !$this->isNew) {
+				$row['id'] = $this->ids[$file][$id];
+				/*if (!$table->load($row['id'])) {
+					$table->id = NULL;
+					$row['id'] = NULL;
+				}*/
+			}
+
+			if ($file == 'files') {
+				$this->records_with_files[$row['record_id']][$row['field_id']] = 1;
+			}
+			if ($file == 'tags') {
+				$db = JFactory::getDBO();
+				$sql = "SELECT id FROM #__js_res_tags WHERE LOWER(`tag`) = '" . JString::strtolower($row['tag']) . "'";
+				$db->setQuery($sql);
+				$tid = $db->loadResult();
+				if ($tid) {
+					$row['id'] = $tid;
+					//$table->id = $tid;
+				}
+			}
+
+			if ($file == 'record_values' && $row['field_type'] == 'child') {
+				$row['field_value'] = @$this->ids['records'][$row['field_value']];
+			}
+
+			if ($file == 'vote') {
+				$row['ref_id'] = @$this->ids[$row['ref_type'] . 's'][$row['ref_id']];
+				if(empty($row['ref_id'])) continue;
+			}
+			if ($file == 'subscribe') {
+				$row['ref_id'] = @$this->ids[$row['type'] . 's'][$row['ref_id']];
+				if(empty($row['ref_id'])) continue;
+			}
+
+			foreach ($keys as $k => $v) {
+				if ($k == 'user_id') {
+					$val = (array_key_exists($row[$k], $this->ids['users']) ? $this->ids['users'][$row[$k]] : $this->pack->user_id);
+
+					/*if($this->pack->users != 2)
+					{
+					$val = (!empty($this->ids['users'][$row[$k]]) ? $this->ids['users'][$row[$k]] : $this->pack->user_id);
+					}
+					else
+					{
+						$val = $this->pack->user_id;
+					}*/
+				} else {
+					$val = @$this->ids[$v][$row[$k]];
+				}
+				$row[$k] = $val;
+			}
+
+			if ($file == 'categories' || $file == 'comments') {
+				$table->setLocation($row['parent_id'], 'last-child');
+			}
+
+			if ($file == 'comments' && !empty($row['attachment'])) {
+				$atachments = json_decode($row['attachment'], true);
+				if (!is_array($atachments)) {
+					settype($atachments, 'array');
+				}
+
+				foreach ($atachments as $at_key => &$at_value) {
+					$file_id = @$this->ids['files'][$at_value['id']];
+					$at_value['id'] = $file_id;
+				}
+				$row['attachment'] = json_encode($atachments);
+			}
+
+			$table->bind($row);
+			$table->store();
+
+			if ($file == 'sections') {
+
+				$query = "SELECT id FROM #__menu WHERE link LIKE '%index.php?option=com_cobalt&view=records&section_id={$table->id}%' AND published = 1";
+				$db->setQuery($query);
+				$result = $db->loadResult();
+				if (!$result) {
+					$query = "SELECT menutype FROM #__menu WHERE home = 1";
+					$db->setQuery($query);
+					$menutype = $db->loadResult();
+
+					$menu_table = JTable::getInstance('Menu', 'JTable');
+
+					$menu_table->id = 0;
+
+					$menu_table->parent_id = 1;
+					$menu_table->menutype = $menutype;
+
+					$menu_table->setLocation(1, 'last-child');
+
+					$menu_table->level = null;
+					$menu_table->lft = null;
+					$menu_table->rgt = null;
+					$menu_table->home = 0;
+
+					$menu_table->link = "index.php?option=com_cobalt&view=records&section_id={$table->id}";
+					$menu_table->language = '*';
+					$menu_table->type = 'component';
+					$component = JComponentHelper::getComponent('com_cobalt');
+					$menu_table->component_id = $component->id;
+					$menu_table->published = 1;
+
+					$menu_table->title = $row['title'] ? $row['title'] : $row['name'];
+					$menu_table->alias = $row['alias'] . '-' . $this->key;
+
+					$db->setQuery("DELETE FROM #__menu WHERE alias = ".$db->quote($menu_table->alias));
+					$db->query();
+
+					if (!$menu_table->check()) {
+						JError::raiseError(400, $menu_table->getError());
+					}
+					if (!$menu_table->store()) {
+						JError::raiseError(400, $menu_table->getError());
+					}
+
+					if (!$menu_table->rebuildPath($menu_table->id)) {
+						JError::raiseError(400, $menu_table->getError());
+					}
+					$result = $menu_table->id;
+
+				}
+
+				$params = new JRegistry($table->params);
+				$params->set('general.category_itemid', $result);
+				$table->params = $params->toString();
+				$table->store();
+
+				$types = $params->get('general.type');
+				if (!is_array($types)) {
+					settype($types, 'array');
+				}
+				$type_table = JTable::getInstance('Type', 'CobaltTable');
+				foreach ($types as $type_id) {
+					$type_table->load($this->ids['types'][$type_id]);
+					$params = new JRegistry($type_table->params);
+					$params->set('properties.item_itemid', $result);
+					$type_table->params = $params->toString();
+					$type_table->store();
+					$type_table->reset();
+				}
+			}
+
+			if (@$table->id) $this->ids[$file][$id] = $table->id;
+
+			$table->reset();
+			$table->id = null;
+		}
+
+		if ($file == 'categories') {
+			$row = array_shift($content);
+			$section_id = @$row['section_id'];
+			if ($section_id) {
+				$query = "UPDATE `#__js_res_categories` SET `path` = REPLACE(`path`, 'root/', '') WHERE `section_id` = {$section_id}";
+				$db->setQuery($query);
+				$db->query();
+			}
+		}
+
+		unset($content);
+	}
+}

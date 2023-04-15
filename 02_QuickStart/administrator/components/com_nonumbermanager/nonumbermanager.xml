@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.4" type="component" method="upgrade">
+	<name>com_nonumbermanager</name>
+	<description>COM_NONUMBERMANAGER_DESC</description>
+	<version>5.2.5</version>
+	<creationDate>March 2016</creationDate>
+	<author>NoNumber (Peter van Westen)</author>
+	<authorEmail>peter@nonumber.nl</authorEmail>
+	<authorUrl>https://www.nonumber.nl</authorUrl>
+	<copyright>Copyright © 2016 NoNumber All Rights Reserved</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+
+	<scriptfile>script.install.php</scriptfile>
+
+	<updateservers>
+		<server type="extension" priority="1" name="NoNumber Extension Manager">
+			http://download.nonumber.nl/updates.xml?e=nonumberextensionmanager&amp;type=.xml
+		</server>
+	</updateservers>
+
+	<administration>
+		<menu img="../media/nonumbermanager/images/nonumberextensionmanager.png">COM_NONUMBERMANAGER</menu>
+
+		<files>
+			<filename>nonumbermanager.php</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			<filename>extensions.xml</filename>
+			<filename>script.install.helper.php</filename>
+			<folder>controllers</folder>
+			<folder>language</folder>
+			<folder>models</folder>
+			<folder>views</folder>
+		</files>
+	</administration>
+
+	<media folder="media" destination="nonumbermanager">
+		<folder>css</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>less</folder>
+	</media>
+</extension>

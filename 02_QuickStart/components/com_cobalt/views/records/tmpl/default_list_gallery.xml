@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Gallery</name>
+	<author>MintJoomla</author>
+	<creationDate>Febrary 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 MintJoomla. All rights reserved.</copyright>
+	<license>Commercial (http://www.mintjoomla.com/commercial-license)</license>
+	<authorEmail>support@mintjoomla.com</authorEmail>
+	<authorUrl>www.mintjoomla.com</authorUrl>
+	<version>8.17</version>
+	<description>List of articles template part of Gallery pack</description>
+
+	<fields name="tmpl_params">
+		<fieldset name="params" label="Params">
+			<field name="field_id_descr" client="list" type="meresourcesfields" key="id" default="" filters="'textarea','text','html'" label="Description field" />
+			<field name="field_id_gallery" client="list" type="meresourcesfields" key="id" default="" filters="'gallery','image'" label="Gallery field" />
+			<field name="columns" type="list" default="3" label="Columns">
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="6">6</option>
+			</field>
+			<field name="well" type="radio" class="btn-group" default="0" label="Style with wells">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+	<fields name="tmpl_core">
+		<fieldset name="general2" label="CFORMAT">
+			<field name="item_author_avatar" type="radio" class="btn-group" default="1" label="X_AUTHORAVATAR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_author_avatar_width" label="X_AUTHAVATWIDTH" type="text" size="3" default="22" />
+			<field name="item_author_avatar_height" label="X_AUTHAVATHEIGHT" type="text" size="3" default="22" />
+			<field name="item_time_format" type="list" default="d M Y" label="CDATEFORMAT">
+				<option value="h:i A, l, d F Y">12:00 AM, Tuesday, 30 December 2007</option>
+				<option value="h:i A, l, F d, Y">12:00 AM, Tuesday, December 30, 2007</option>
+				<option value="l, d F Y">Tuesday, 30 December 2007</option>
+				<option value="l, F d, Y">Tuesday, December 30, 2007</option>
+				<option value="d F Y">30 December 2007</option>
+				<option value="F d, Y">December 30, 2007</option>
+				<option value="d M Y">30 Dec 2007</option>
+				<option value="M d, Y">Dec 30, 2007</option>
+				<option value="d.m.y">30.12.07</option>
+				<option value="m.d.y">12.30.17</option>
+				<option value="m-d-y">30-12-07</option>
+				<option value="d-m-y">12-30-07</option>
+				<option value="m/d/y">30/12/07</option>
+				<option value="d/m/y">12/30/07</option>
+			</field>
+			<field name="bookmark_icons" label="X_ICONBOOKMARK" type="folderlist" hide_none="1" hide_default="1" default="star" directory="media/mint/icons/bookmarks" />
+		</fieldset>
+
+		<fieldset name="elements2" label="CLISTELEMENTS">
+			<field name="item_pagination" type="radio" class="btn-group" default="1" label="CPAGINATION">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_limit_box" type="radio" class="btn-group" default="0" label="X_PAGLIMITBOX">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_limit_default" type="text" size="3" default="21" label="X_DEFAULTPAGLIMIT" />
+		</fieldset>
+
+		<fieldset name="elements" label="CRECORDELEM">
+			<field name="item_title" type="radio" class="btn-group" default="1" label="X_SHOWTITLE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_author" type="radio" class="btn-group" default="1" label="X_SHOWAUTHORNAME">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_ctime" type="radio" class="btn-group" default="1" label="CCTIME">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+		<fieldset name="filters" label="CFILTERICONS">
+			<field name="item_type_filter" type="radio" class="btn-group" default="1" label="CTYPE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="item_author_filter" type="radio" class="btn-group" default="1" label="CAUTHOR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<cobaltfield>
+		<name>Audio</name>
+		<group>Media Form Elements</group>
+
+		<config>
+			<fields name="params">
+				<fieldset name="tmpl">
+					<field type="filelist" name="template_input" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/audio/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+					<field type="filelist" name="template_output_list" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/audio/tmpl/output" label="F_TMPLLIST" default="default.php" />
+					<field type="filelist" name="template_output_full" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/audio/tmpl/output" label="F_TMPLFULL" default="default.php" />
+				</fieldset>
+				<fieldset name="conv" label="F_LIVECONVERSION" description="F_LIVECONDESCR">
+					<field name="convert" label="F_ALLOWCONV" type="radio" class="btn-group" default="0">
+						<option value="1">Yes</option>
+						<option value="0">No</option>
+					</field>
+					<field type="text" name="command" label="F_FFMPEGCMD" size="40" default="c:\ffmpeg\bin\ffmpeg.exe" description="F_FFMPEGCMDDESCR" />
+				</fieldset>
+
+				<fieldset name="general" label="FS_UPLOAD">
+					<field name="method" type="list" label="F_UPLOADMETHOD">
+						<option value="auto">XML_OPT_AUTO</option>
+						<option value="html5">XML_OPT_HTML5</option>
+						<option value="html4">XML_OPT_HTML4</option>
+						<option value="flash">XML_OPT_FLASH</option>
+					</field>
+					<field name="file_formats" size="40" type="text" default="mp3, ogg, wav" label="F_ALLOWEDFORMATS" />
+					<field name="max_count" type="text" default="0" size="3" label="F_MAXCOUNTLIMIT" />
+					<field type="text" size="3" name="max_size" label="F_MAXSIZE" description="" default="2048" />
+					<field name="autostart" type="radio" class="btn-group" default="1" label="F_AUTOSTARTUPLOAD">
+						<option value="0">No</option>
+						<option value="1">Yes</option>
+					</field>
+					<field type="text" name="subfolder" label="F_SPECSUBFOLDER" description="F_SPECSUBFOLDER_DESCR" default="audio" />
+					<field name="delete_access" type="radio" class="btn-group" default="1" label="F_AUTHORCANDELETE">
+						<option value="0">No</option>
+						<option value="1">Yes</option>
+					</field>
+					<field name="allow_edit_title" type="radio" class="btn-group" default="1" label="F_ALLOWEDITTITLE">
+						<option value="0">No</option>
+						<option value="1">Yes</option>
+					</field>
+					<field name="allow_add_descr" type="radio" class="btn-group" default="1" label="F_ALLOWADDDESCR">
+						<option value="0">No</option>
+						<option value="1">Yes</option>
+					</field>
+					<field name="sort" type="list" default="0" label="F_SORTBY" description="">
+						<option value="0 ASC">XML_OPT_NAMEASC</option>
+						<option value="0 DESC">XML_OPT_NAMEDESC</option>
+						<option value="1 ASC">XML_OPT_SIZEASC</option>
+						<option value="1 DESC">XML_OPT_SIZEDESC</option>
+						<option value="2 ASC">XML_OPT_HITSASC</option>
+						<option value="2 DESC">XML_OPT_HITSDESC</option>
+						<option value="3 ASC">XML_OPT_IDASC</option>
+						<option value="3 DESC">XML_OPT_IDDESC</option>
+					</field>
+					<field name="show_download" label="F_SHOWDOWNL" type="accesslevel" default="1">
+						<option value="0">XML_OPT_NOONE</option>
+					</field>
+					<field name="allow_download" label="F_ALLOWDOWNL" type="accesslevel" default="1">
+						<option value="0">No one</option>
+					</field>
+				</fieldset>
+				<fieldset name="playerlist" label="F_PLAYERLIST">
+					<field type="text" size="3" name="width_list" label="F_PLAYERWIDTH" default="350" description="" />
+					<field type="text" size="3" name="height_list" label="F_PLAYERHEIGHT" default="27" />
+					<field name="hits_list" label="F_DONTLOADHITS" type="radio" class="btn-group" default="0">
+						<option value="1">Yes</option>
+						<option value="0">No</option>
+					</field>
+					<field name="listbar_list" label="F_SHOWLISTBAR" type="radio" class="btn-group" default="0">
+						<option value="1">Yes</option>
+						<option value="0">No</option>
+					</field>
+				</fieldset>
+				<fieldset name="playerfull" label="F_PLAYERFULL">
+					<field type="text" size="3" name="width_full" label="F_PLAYERWIDTH" default="350" description="" />
+					<field type="text" size="3" name="height_full" label="F_PLAYERHEIGHT" default="27" />
+					<field name="hits_full" label="F_DONTLOADHITS" type="radio" class="btn-group" default="0">
+						<option value="1">Yes</option>
+						<option value="0">No</option>
+					</field>
+					<field name="listbar_full" label="F_SHOWLISTBAR" type="radio" class="btn-group" default="0">
+						<option value="1">Yes</option>
+						<option value="0">No</option>
+					</field>
+				</fieldset>
+				<fieldset name="id3" label="F_IDTAGS" description="F_IDTAGDESCR">
+					<field name="show_artist" label="F_SHOWARTIST" type="radio" class="btn-group" default="0">
+						<option value="0">No</option>
+						<option value="1">XML_OPT_LIST</option>
+						<option value="2">XML_OPT_FULL</option>
+						<option value="3">XML_OPT_BOTH</option>
+					</field>
+					<field name="show_album" label="F_SHOWALBUM" type="radio" class="btn-group" default="0">
+						<option value="0">No</option>
+						<option value="1">XML_OPT_LIST</option>
+						<option value="2">XML_OPT_FULL</option>
+						<option value="3">XML_OPT_BOTH</option>
+					</field>
+					<field name="show_year" label="F_SHOWYEAR" type="radio" class="btn-group" default="0">
+						<option value="0">No</option>
+						<option value="1">XML_OPT_LIST</option>
+						<option value="2">XML_OPT_FULL</option>
+						<option value="3">XML_OPT_BOTH</option>
+					</field>
+					<field name="show_comment" label="F_SHOWCOMMENT" type="radio" class="btn-group" default="0">
+						<option value="0">No</option>
+						<option value="1">XML_OPT_LIST</option>
+						<option value="2">XML_OPT_FULL</option>
+						<option value="3">XML_OPT_BOTH</option>
+					</field>
+					<field name="show_genre" label="F_SHOWGANRE" type="radio" class="btn-group" default="0">
+						<option value="0">No</option>
+						<option value="1">XML_OPT_LIST</option>
+						<option value="2">XML_OPT_FULL</option>
+						<option value="3">XML_OPT_BOTH</option>
+					</field>
+				</fieldset>
+				<fieldset name="emerald" label="F_DOWNLOADSUBSCR" description="F_DOWNLOADSUBSCR_DESCR"  addfieldpath="/components/com_emerald/models/fields/">
+					<field name="subscr_skip" type="accesslevel" default="3" label="F_SUBSCR_SKIPFOR" description="F_SUBSCR_SKIPFORDESCR">
+						<option value="0">XML_OPT_NOONE</option>
+					</field>
+					<field name="subscr_skip_author" type="radio" class="btn-group" default="1" label="F_SUBSCR_SKIPAUTHOR" description="">
+						<option value="0">CNO</option>
+						<option value="1">CYES</option>
+					</field>
+					<field name="subscr_skip_moderator" type="radio" class="btn-group" default="1" label="F_SUBSCR_SKIPMODER" description="F_SUBSCR_SKIPMODERDESCR">
+						<option value="0">CNO</option>
+						<option value="1">CYES</option>
+					</field>
+					<field name="subscription" type="planslist"  default="" multiple="true" label="F_SUBSCR_PLANS" description="" />
+					<field name="subscription_count" type="radio" default="" class="btn-group" multiple="true" label="F_SUBSCR_COUNTLIMIT" description="F_SUBSCR_COUNTLIMITDESCR">
+						<option value="0">CNO</option>
+						<option value="1">CYES</option>
+					</field>
+					<field name="subscription_msg" type="text" size="40" default="You cannot download this file. You have to be subscribed member" label="F_SUBSCR_MSG" description="" />
+					<field name="subscription_redirect" type="list" default="1" label="F_SUBSCR_BEHAVE">
+						<option value="0">F_SUBSCR_BEHAVE1</option>
+						<option value="1">F_SUBSCR_BEHAVE2</option>
+					</field>
+					<field name="can_select_subscr" type="accesslevel" default="0" label="F_WHOCANSELECTSUBSCR" description="">
+						<option value="0">XML_OPT_NOONE</option>
+					</field>
+				</fieldset>
+			</fields>
+		</config>
+	</cobaltfield>

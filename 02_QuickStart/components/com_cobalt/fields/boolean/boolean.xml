@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cobaltfield>
+	<name>Boolean</name>
+	<group>Special Form Elements</group>
+
+	<config>
+		<fields name="params">
+			<fieldset name="tmpl">
+				<field type="filelist" name="template_input" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/boolean/tmpl/input" label="F_TMPLINPUT" default="default.php" />
+				<field type="filelist" name="template_output_list" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/boolean/tmpl/output" label="F_TMPLLIST" default="default.php" />
+				<field type="filelist" name="template_output_full" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/boolean/tmpl/output" label="F_TMPLFULL" default="default.php" />
+			</fieldset>
+			<fieldset name="core">
+				<field name="sortable" type="radio" class="btn-group" default="0" label="F_SORTABLE" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="filter" label="FS_FILTERGEN">
+				<field type="filelist" name="template_filter" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/boolean/tmpl/filter" label="F_TMPLFILTER" default="default.php" />
+				<field type="filelist" name="template_filter_module" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/boolean/tmpl/filter" label="F_TMPLFILTERMODULE" default="default.php" />
+				<field name="filter_enable" type="radio" class="btn-group" default="0" label="F_ENABLE" description="">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="filter_show_number" type="radio" class="btn-group" default="1" label="F_FBOXSHOWNUMS" description="F_FBOXSHOWNUMS_DESCR">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="filter_hide" type="radio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</field>
+				<field name="filter_descr" type="text" default="" size="40" label="F_DESCR" description="" />
+			</fieldset>
+
+			<fieldset name="filter2" label="FS_FILTERFIELDSPEC">
+				<field name="filter_linkage" type="list" default="1" label="F_VALUELINKAGE" description="F_VALUELINKAGE_DESCR">
+					<option value="0">XML_OPT_NOFILTERLINK</option>
+					<option value="1">XML_OPT_VALUEASFLINK</option>
+					<option value="2">XML_OPT_SMALICONASFLINK</option>
+				</field>
+				<field name="filter_icon" type="imagelist" default="funnel-small.png" directory="/components/com_cobalt/images/filter/" label="F_ICON" description="F_ICON_DESCR" />
+				<field name="filter_tip" type="text" default="Show all records where %s is equal to %s" size="40" label="F_VALUETOOLTIP" description="F_VALUETOOLTIP_DESCR" />
+			</fieldset>
+
+			<fieldset name="general" label="FS_GENERAL" addfieldpath="/administrator/components/com_cobalt/models/fields">
+				<field name="true" type="text" default="Yes" label="F_LABELTRUE" description="" />
+				<field name="false" type="text" default="No" label="F_LABELFALSE" description="" />
+
+				<field name="icon_true" type="fieldicon" size="10" default="tick.png" label="F_ICONTRUE" description="" />
+				<field name="icon_false" type="fieldicon" size="10" default="cross.png" label="F_ICONFALSE" description="" />
+				
+				<field name="no_value" type="list" default="0" label="F_NOVAL" description="F_NOVALDESCR">
+					<option value="0">XML_OPT_FVVAL</option>
+					<option value="1">XML_OPT_FVALL</option>
+				</field>
+				
+				<field name="view_what" type="list" default="both" label="F_VIEWFORMAT" description="">
+					<option value="label">XML_OPT_LABEL</option>
+					<option value="icon">XML_OPT_ICON</option>
+					<option value="both">XML_OPT_BOTH</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</cobaltfield>

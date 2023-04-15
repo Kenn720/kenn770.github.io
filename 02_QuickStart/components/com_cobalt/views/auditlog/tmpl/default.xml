@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="CURLAUDITLOG">
+		<message>CURLAUDITLOGDESCR</message>
+	</layout>
+	<fields name="request">
+		<fieldset name="request" label="CURLGP" addfieldpath="/libraries/mint/forms/fields">
+			<!-- field name="section_id" type="meresourcessection" default="" label="CURLSECTIONID" /-->
+			<!-- field name="record_id" type="text" size="3" default="" label="CURLRECID" /-->
+		</fieldset>
+	</fields>
+</metadata>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset name="toolset2" label="Move/Delete User">
+		<field type="text" name="user_from" label="User ID" description="Enter ID of the user which you are going to delete or already deleted" size="5" />
+		<field type="radio" class="btn-group" name="user_delete" label="Delete user after process" description="Delete user from Joomla core user table after process" default="0">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</field>
+		<field type="list" name="action" label="What to do" description="" default="2">
+			<option value="1">Delete all user records from DB</option>
+			<option value="2">Replace user ID with another user ID</option>
+		</field>
+		<field type="text" name="user_to" label="Move to another user ID" description="Enter user ID you want to replace to" size="5" />
+	</fieldset>
+	<fieldset name="toolset1" label="DB Tools">
+		<field type="list" name="db_action" label="Operation" description="" default="1" required="true">
+			<option value="1">OPTIMIZE</option>
+			<option value="2">REPAIR</option>
+			<option value="3">ANALYZE</option>
+			<option value="4">TRUNCATE  (empty)</option>
+			<option value="5">CHECK</option>
+		</field>
+		<field type="medbtables" name="db_tables" label="Tables" description="" default="" multiple="multiple" size="20" required="true" />
+	</fieldset>
+	<fieldset name="toolset3" label="Clean Thumbnails">
+	</fieldset>
+	<fieldset name="toolset4" label="Clean Files">
+	</fieldset>
+	<fieldset name="toolset6" label="Clean Files">
+	</fieldset>
+	<fieldset name="toolset5" label="Reindex records" addfieldpath="/libraries/mint/forms/fields/">
+		<field type="mertype" name="types" multi="1" label="Reindex types" description=""/>
+	</fieldset>
+	<fieldset name="toolset7" label="update GEO Field" addfieldpath="/libraries/mint/forms/fields/">
+		<field name="field_id_geo" key="id" type="meresourcesfields" size="1" multiple="false" default="" label="Field with position source" filters="'geo'"/>
+	</fieldset>
+</form>

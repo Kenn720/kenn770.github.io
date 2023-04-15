@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="file" method="upgrade">
+	<name>Cobalt - Comments - Compojoom Joomla extension</name>
+	<author>compojoom.com</author>
+	<license>GPL GNU</license>
+	<authorEmail>daniel@compojoom.com</authorEmail>
+	<authorUrl>https://compojoom.com</authorUrl>
+	<creationDate>October 2013</creationDate>
+	<copyright>© 2013 Compojoom</copyright>
+	<version>8.1</version>
+	<description>Content type to integrate with the CComment extension from compojoom</description>
+
+	<fileset>
+		<files target="components/com_cobalt/library/php/comments">
+			<folder>ccomment</folder>
+		</files>
+	</fileset>
+</extension>

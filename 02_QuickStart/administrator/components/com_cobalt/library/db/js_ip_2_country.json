@@ -1,0 +1,47 @@
+{
+	"engine": "MyISAM",
+	"fields": [
+		{
+			"name":    "ip_from",
+			"type":    "int(10)",
+			"null":    "NO",
+			"default": "0"
+		},
+		{
+			"name":    "ip_to",
+			"type":    "int(10)",
+			"null":    "NO",
+			"default": "0"
+		},
+		{
+			"name":    "short_code",
+			"type":    "varchar(2)",
+			"null":    "NO",
+			"default": ""
+		},
+		{
+			"name":    "code",
+			"type":    "varchar(3)",
+			"null":    "NO",
+			"default": ""
+		},
+		{
+			"name":    "country",
+			"type":    "varchar(100)",
+			"null":    "NO",
+			"default": ""
+		}
+	],
+	"keys":   [
+		{
+			"name":   "idx_from",
+			"type":   "KEY",
+			"fields": "ip_from"
+		},
+		{
+			"name":   "idx_to",
+			"type":   "KEY",
+			"fields": "ip_to"
+		}
+	]
+}

@@ -1,0 +1,49 @@
+
+.datepicker, .datepicker .body .column, .datepicker .titleText .column {
+	width: 210px;
+}
+.datepicker .footer input {
+	width: 90px;
+}
+.datepicker .footer {
+	padding: 0px;
+}
+.datepicker .days .title {
+	width: 25px;
+}
+
+
+DIV.default_dates{
+	border:0px solid red;
+	padding: 0px;
+	margin-top: 8px;
+}
+
+
+UL.date_list {
+	list-style-type: none;
+	margin:0px !important;
+	padding:0px !important;
+}
+LI.default_dates span{
+	margin: 0px;
+}
+LI.default_dates {
+	list-style-type: none;
+	border:1px solid #e0e0e0;
+	margin-bottom: 8px !important;
+	padding:8px !important;
+	border-radius: 8px 8px;
+}
+
+img.delete_icon{
+	float:right;
+	padding: 3px;
+	float: right;
+	cursor: pointer;
+}
+
+.date_list {
+	min-width: 70px;
+}
+

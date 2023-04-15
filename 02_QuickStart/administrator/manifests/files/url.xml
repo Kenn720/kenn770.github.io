@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="file" method="upgrade">
+<name>Cobalt - Field - URL</name>
+<author>MintJoomla</author>
+<license>GPL GNU</license>
+<authorEmail>support@mintjoomla.com</authorEmail>
+<authorUrl>http://www.mintjoomla.com</authorUrl>
+<creationDate>April 2012</creationDate>
+<copyright>(c) 2012 MintJoomla</copyright>
+	<version>8.70</version>
+<description>Cobalt - Field - URL: This is advanced URL field</description>
+<fileset>
+	<files target="components/com_cobalt/fields">
+		<folder>url</folder>
+	</files>
+	<files folder="url/language" target="language/en-GB">
+		<filename>en-GB.com_cobalt_field_url.ini</filename>
+	</files>
+</fileset>
+</extension>

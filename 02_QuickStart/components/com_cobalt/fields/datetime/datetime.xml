@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cobaltfield>
+	<name>Date And Time</name>
+	<group>Special Form Elements</group>
+
+	<config>
+	<fields name="params">
+		<fieldset name="tmpl">
+			<field type="filelist" name="template_input" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/datetime/tmpl/input" label="F_TMPLINPUT" default="single_date_picker.php" />
+			<field type="filelist" name="template_output_list" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/datetime/tmpl/output" label="F_TMPLLIST" default="list.php" />
+			<field type="filelist" name="template_output_full" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/datetime/tmpl/output" label="F_TMPLFULL" default="list.php" />
+		</fieldset>
+
+		<fieldset name="core">
+			<field name="sortable" type="radio" class="btn-group" default="0" label="F_SORTABLE" description="">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+		</fieldset>
+		<fieldset name="filter" label="FS_FILTERGEN">
+				<field type="filelist" name="template_filter" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/datetime/tmpl/filter" label="F_TMPLFILTER" default="single_date_picker.php" />
+				<field type="filelist" name="template_filter_module" filter="php$" hide_none="1" hide_default="1" directory="/components/com_cobalt/fields/datetime/tmpl/filter" label="F_TMPLFILTERMODULE" default="single_date_picker.php" />
+			<field name="filter_enable" type="radio" class="btn-group" default="0" label="F_ENABLE" description="">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="filter_hide" type="radio" class="btn-group" default="0" label="F_HIDE" description="F_HIDE_DESCR">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="filter_descr" type="text" default="" size="40" label="F_DESCR" description="" />
+		</fieldset>
+
+		<fieldset name="filter2" label="FS_FILTERFIELDSPEC">
+			<field name="filter_linkage" type="list" default="1" label="F_VALUELINKAGE" description="F_VALUELINKAGE_DESCR">
+					<option value="0">XML_OPT_NOFILTERLINK</option>
+					<option value="1">XML_OPT_VALUEASFLINK</option>
+					<option value="2">XML_OPT_SMALICONASFLINK</option>
+			</field>
+			<field name="filter_icon" type="imagelist" default="funnel-small.png" directory="/components/com_cobalt/images/filter/" label="F_ICON" description="F_ICON_DESCR" />
+			<field name="filter_tip" type="text" default="Show all records where %s is equal to %s" size="40" label="F_VALUETOOLTIP" description="F_VALUETOOLTIP_DESCR" />
+			<field name="filter_compare_label" type="text" default="Show all records %s" size="40" label="F_COMPARELABEL" description="F_COMPARELABEL_DESCR" />
+			<field name="filter_compare_stbefore" type="text" default="Start before" size="40" label="F_COMPARESTARTBEFORE" description="" />
+			<field name="filter_compare_stafter" type="text" default="Start after" size="40" label="F_COMPARESTARTAFTER" description="" />
+			<field name="filter_compare_endbefore" type="text" default="End before" size="40" label="F_COMPAREENDBEFORE" description="" />
+			<field name="filter_compare_endafter" type="text" default="End after" size="40" label="F_COMPAREENDAFTER" description="" />
+		</fieldset>
+
+		<fieldset name="general" label="FS_INPUT">
+			<field name="input_default" type="list" default="0" label="F_INPUTSDEFAULT" description="">
+				<option value="0">XML_OPT_NOTHING</option>
+				<option value="now">XML_OPT_NOW</option>
+				<option value="1 day">XML_OPT_DAY</option>
+				<option value="1 month">XML_OPT_MONTH</option>
+				<option value="1 year">XML_OPT_YEAR</option>
+				<option value="custom">XML_OPT_CUSTOM</option>
+			</field>
+			<field name="custom_input" type="text" default="" label="F_INPUTCUSTOM" description="F_INPUTCUSTOM_DESCR" />
+			<field name="input_order" type="list" default="month" label="F_INPUTORDER" description="F_INPUTORDER_DESCR">
+				<option value="day">XML_OPT_DAYF</option>
+				<option value="month">XML_OPT_MONTHF</option>
+			</field>
+			<field name="input_delimiter" type="list" default="/" label="F_INPUTDELIM" description="F_INPUTDELIM_DESCR">
+				<option value=".">.</option>
+				<option value="/">/</option>
+				<option value="\\">\</option>
+				<option value=":">:</option>
+				<option value="-">-</option>
+			</field>
+
+
+			<field name="format" type="list" label="F_INPUTFORMAT" default="%A, %d %B %Y" description="F_INPUTFORMAT_DESCR">
+                <option value="h:i A, l, d F Y">12:46 AM, Tuesday, 30 December 2007</option>
+				<option value="l, d F Y">Tuesday, 30 December 2007</option>
+				<option value="h:i A, d F Y">12:46 AM, 30 December 2007</option>
+				<option value="h:i A, d M Y">12:46 AM, 30 Dec 2007</option>
+				<option value="h:i A, F Y">12:46 AM, 30 December</option>
+				<option value="d F Y">30 December 2007</option>
+				<option value="h:i A, d M">12:46 AM, 30 Dec</option>
+				<option value="d M Y">30 Dec 2007</option>
+				<option value="d F">30 December</option>
+				<option value="d M">30 Dec</option>
+				<option value="l">Tuesday</option>
+				<option value="custom">XML_OPT_CUSTOM</option>
+			</field>
+			<field name="custom" type="metext" label="F_CUSTOMFORMAT" prepend="You can see characters list &lt;a href='http://php.net/manual/en/function.date.php' target='_blank'&gt;here&lt;/a&gt;&lt;br /&gt;" description="F_CUSTOMFORMAT_DESCR" />
+
+			<field name="time" type="radio" class="btn-group" label="F_SETTIME" default="0" description="F_SETTIME_DESCR">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="field_id_type" key="id" type="meresourcesfields" size="1" multiple="false" label="F_FIELDWITHEVENTTYPE" description="F_FIELDWITHEVENTTYPEDESCR" filters="'select'"/>
+		</fieldset>
+		<fieldset name="override" label="FS_OVERRIDE" description="">
+			<field name="ovr_ctime" type="radio" class="btn-group" label="F_OVERRIDERECORDCTIME" default="0" description="">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="ctime_add" type="text" default="" label="F_CTIMEMODIFYVAL" description="F_CTIMEMODIFYVAL_DESCR" />
+			<field name="ovr_extime" type="radio" class="btn-group" label="F_OVERRIDERECORDEXTIME" default="0" description="">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+			<field name="extime_add" type="text" default="" label="F_EXTIMEMODIFYVAL" description="F_EXTIMEMODIFYVAL_DESCR" />
+		</fieldset>
+
+
+		<fieldset name="output" label="FS_OUTPUT">
+			<field name="format_out" type="list" label="F_FORMAT" default="d M Y" description="">
+				<option value="h:i A, l, d F Y">12:46 AM, Tuesday, 30 December 2007</option>
+				<option value="l, d F Y">Tuesday, 30 December 2007</option>
+				<option value="h:i A, d F Y">12:46 AM, 30 December 2007</option>
+				<option value="h:i A, d M Y">12:46 AM, 30 Dec 2007</option>
+				<option value="h:i A, F Y">12:46 AM, 30 December</option>
+				<option value="d F Y">30 December 2007</option>
+				<option value="h:i A, d M">12:46 AM, 30 Dec</option>
+				<option value="d M Y">30 Dec 2007</option>
+				<option value="d F">30 December</option>
+				<option value="d M">30 Dec</option>
+				<option value="l">Tuesday</option>
+				<option value="custom">XML_OPT_CUSTOM</option>
+			</field>
+			<field name="custom_out" type="metext" label="F_CUSTOMFORMAT" prepend="You can see characters list &lt;a href='http://php.net/manual/en/function.date.php' target='_blank'&gt;here&lt;/a&gt;&lt;br /&gt;" description="" />
+			<field name="computation" type="list" label="F_DAYCOMPUTATION" default="day" description="">
+				<option value="round">XML_OPT_ROUND</option>
+				<option value="int">XML_OPT_INT</option>
+				<option value="ceil">XML_OPT_CEIL</option>
+				<option value="day">XML_OPT_DAY</option>
+			</field>
+			<field name="mode" type="list" label="F_DISPLAYMODE" default="2" description="">
+				<option value="1">XML_OPT_DAYS</option>
+				<option value="2">XML_OPT_DATE</option>
+				<option value="3">XML_OPT_DAYSDATE</option>
+				<option value="4">XML_OPT_AGE</option>
+			</field>
+            <field type="list" label="F_NORMALSTYLE" name="normal_style" default="b" description="">
+                <option value="span">XML_OPT_NORMAL</option>
+                <option value="b">XML_OPT_BOLD</option>
+                <option value="i">XML_OPT_ITALIC</option>
+            </field>
+            <field type="text" label="F_NORMALCOLOR" name="normal_color" default=""  size="40"/>
+            <field type="list" label="F_NOTIFYSTYLE" name="notify_style" default="b" description="">
+                <option value="span">XML_OPT_NORMAL</option>
+                <option value="b">XML_OPT_BOLD</option>
+                <option value="i">XML_OPT_ITALIC</option>
+            </field>
+            <field type="text" label="F_NOTIFYCOLOR" name="notify_color" default="orange"  size="40" />
+            <field type="list" label="F_PASTSTYLE" name="past_style" default="b" description="">
+                <option value="span">XML_OPT_NORMAL</option>
+                <option value="b">XML_OPT_BOLD</option>
+                <option value="i">XML_OPT_ITALIC</option>
+                <option value="strike">XML_OPT_STRIKE</option>
+            </field>
+            <field type="text" label="F_PASTCOLOR" name="past_color" default="red" size="40" />
+		</fieldset>
+
+		<fieldset name="output_days" label="FS_OUTPUT_DAYS">
+			<field type="metext" label="F_PREPEND" name="normal_before" default="Still" size="40" prepend="These parameters would be applied &lt;br /&gt;if set date is later than current date&lt;br /&gt;"/>
+			<field type="text" label="F_APPEND" name="normal_after" default="days valid"  size="40"/>
+
+			<field type="spacer"/>
+			<field type="text" label="F_NOTIFICATIONDAYS" name="notify_days" default="30"  size="40"/>
+			<field type="text" label="F_LASTDAYMSG" name="notify_msg" default="Last day"  size="40"/>
+			<field type="text" label="F_PREPEND" name="notify_before" default="Will expire in"  size="40"/>
+			<field type="text" label="F_APPEND" name="notify_after" default="days"  size="40" />
+
+			<field type="spacer"/>
+			<field type="text" label="F_PREPEND" name="past_before" default="Expired since" size="40" />
+			<field type="text" label="F_APPEND" name="past_after" default="days" size="40" />
+		</fieldset>
+
+		<fieldset name="output_date" label="FS_OUTPUT_DATE">
+			<field type="text" label="F_PREPEND" name="date_before" default="" size="40" />
+			<field type="list" label="F_STYLE" name="date_style" default="b" description="">
+				<option value="span">XML_OPT_NORMAL</option>
+				<option value="b">XML_OPT_BOLD</option>
+				<option value="i">XML_OPT_ITALIC</option>
+				<option value="strike">XML_OPT_STRIKE</option>
+			</field>
+			<field type="text" label="F_APPEND" name="date_after" default="" size="40" />
+		</fieldset>
+
+		<fieldset name="output_date_days" label="FS_OUTPUT_DATE_DAYS">
+			<field name="show_days" type="list" label="F_SHOWDAYS" default="1" description="">
+				<option value="1">XML_OPT_BEFORE</option>
+				<option value="2">XML_OPT_AFTER</option>
+			</field>
+			<field type="text" label="F_DATEDAYSEPARATOR" name="date_days_separator" default="" size="40" />
+		</fieldset>
+
+		<fieldset name="age" label="FS_AGE">
+			<field type="text" label="F_PREPEND" name="age_before" default=""  size="40"/>
+			<field type="text" label="F_AGENOTIFY" name="age_notify" default=""  size="40"/>
+			<field type="text" label="F_AGEEXPIRE" name="age_expire" default=""  size="40"/>
+			<field type="list" label="F_STYLE" name="age_style" default="b" description="">
+				<option value="span">XML_OPT_NORMAL</option>
+				<option value="b">XML_OPT_BOLD</option>
+				<option value="i">XML_OPT_ITALIC</option>
+				<option value="strike">XML_OPT_STRIKE</option>
+			</field>
+			<field type="list" label="F_FORMAT" name="age_format" default="[AGE], [DATE]" description="">
+				<option value="1">XML_OPT_AGE</option>
+				<option value="2">XML_OPT_AGEDATE</option>
+				<option value="3">XML_OPT_DATEAGE</option>
+				<option value="custom">XML_OPT_CUSTOM</option>
+			</field>
+			<field type="text" label="F_DATEAGESEPARATOR" name="date_age_separator" default="," size="40" />
+			<field name="age_custom" type="text" label="F_CFORMAT" default="[AGE], [DATE]" description="F_CUSTOMFORMAT_AGE" />
+
+			<field type="text" label="F_APPEND" name="age_after" default="years"  size="40" />
+		</fieldset>
+	</fields>
+
+</config></cobaltfield>

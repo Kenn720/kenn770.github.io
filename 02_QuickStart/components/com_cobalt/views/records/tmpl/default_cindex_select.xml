@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Select</name>
+	<author>MintJoomla</author>
+	<creationDate>Febrary 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 MintJoomla. All rights reserved.</copyright>
+	<license>Commercial (http://www.mintjoomla.com/commercial-license)</license>
+	<authorEmail>support@mintjoomla.com</authorEmail>
+	<authorUrl>www.mintjoomla.com</authorUrl>
+	<version>8.17</version>
+	<description>Category index layout</description>
+	<fields name="tmpl_core">
+		<fieldset name="title" label="CTITLE">
+			<field name="show_title" type="radio" class="btn-group" default="0" label="X_SHOWTITLE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="tag" type="text" size="3" default="h4" label="CHTMLTAG"/>
+			<field name="title_label" type="text" size="40" default="Category Index" label="CTITLE"/>
+		</fieldset>
+	</fields>
+	<fields name="tmpl_params">
+		<fieldset name="categories" label="CCATEGORIES">
+			<field name="cat_nums" type="list" default="current" label="X_RECNUMS">
+				<option value="0">X_RNDONOTSHOW</option>
+				<option value="1">X_RNCURRENT</option>
+			</field>
+			<field name="cat_empty" type="radio" class="btn-group" default="1" label="X_EMPTYCATS" description="X_EMPTYCATDESC">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+</form>

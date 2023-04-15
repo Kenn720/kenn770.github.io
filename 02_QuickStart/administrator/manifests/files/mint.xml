@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="file" version="3.0" method="upgrade">
+	<name>Cobalt - Package - Mediа</name>
+	<author>MintJoomla</author>
+	<creationDate>November 2012</creationDate>
+	<copyright>(C) 2005 - 2012 MintJoomla.</copyright>
+	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+	<authorEmail>support@mintjoomla.com</authorEmail>
+	<authorUrl>http://www.mintjoomla.com</authorUrl>
+	<version>8.85</version>
+	<description><![CDATA[
+	This is MintJoomla - Cobalt 8 Media Pack
+	]]></description>
+
+	<fileset>
+		<files target="media/">
+			<folder>mint</folder>
+		</files>
+	</fileset>
+
+</extension>

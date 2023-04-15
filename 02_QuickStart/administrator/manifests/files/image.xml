@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="file" method="upgrade">
+	<name>Cobalt - Field - Image</name>
+	<author>MintJoomla</author>
+	<license>GPL GNU</license>
+	<authorEmail>support@mintjoomla.com</authorEmail>
+	<authorUrl>http://www.mintjoomla.com</authorUrl>
+	<creationDate>April 2012</creationDate>
+	<copyright>(c) 2012 MintJoomla</copyright>
+	<version>8.68</version>
+	<description>Cobalt - Field - Image: This is simple image field</description>
+	
+	<fileset>
+		<files target="components/com_cobalt/fields">
+			<folder>image</folder>
+		</files>
+		<files folder="image/language" target="language/en-GB">
+             <filename>en-GB.com_cobalt_field_image.ini</filename>
+		</files>
+
+	</fileset>
+		
+</extension>

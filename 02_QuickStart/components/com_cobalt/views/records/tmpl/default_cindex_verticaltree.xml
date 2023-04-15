@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<name>Vertical - Tree</name>
+	<author>MintJoomla</author>
+	<creationDate>Febrary 2012</creationDate>
+	<copyright>Copyright (C) 2005 - 2012 MintJoomla. All rights reserved.</copyright>
+	<license>Commercial (http://www.mintjoomla.com/commercial-license)</license>
+	<authorEmail>support@mintjoomla.com</authorEmail>
+	<authorUrl>www.mintjoomla.com</authorUrl>
+	<version>8.6</version>
+	<description>This template should be generally used with Vertical - Markup template and Vertical - Filters. Thouse are special set.</description>
+
+	<fields name="tmpl_core">
+		<fieldset name="title" label="CTITLE">
+			<field name="show_title" type="radio" default="0" label="X_SHOWTITLE">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="title_label" type="text" size="40" default="Category Index" label="CTITLE" />
+		</fieldset>
+	</fields>
+	<fields name="tmpl_params">
+		<fieldset name="categories" label="CCATEGORIES">
+			<field name="cat_ordering" type="list" default="c.lft ASC" label="CORDERING" >
+				<option value="c.lft ASC">CORDERING</option>
+				<option value="c.title ASC">CORDERNAMEASC</option>
+				<option value="c.title DESC">CORDERNAMEDESC</option>
+			</field>
+			<field name="cat_nums" type="list" default="1" label="X_RECNUMS" >
+				<option value="0">X_RNDONOTSHOW</option>
+				<option value="1">X_RNCURRENT</option>
+			<!-- 
+				<option value="2">X_RNCUTSUBCAT</option>
+			-->
+			</field>
+
+			<field name="cat_empty" type="radio" class="btn-group" default="1" label="X_EMPTYCATS" description="X_EMPTYCATDESC">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+			<field name="expand" type="radio" class="btn-group" default="0" label="CEXPANDALL" description="CEXPANDDESCR">
+				<option value="0">CNO</option>
+				<option value="1">CYES</option>
+			</field>
+		</fieldset>
+	</fields>
+
+
+</form>
